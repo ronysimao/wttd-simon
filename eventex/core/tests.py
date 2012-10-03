@@ -16,10 +16,17 @@ class SimpleTest(TestCase):
         """
         self.assertEqual(1 + 1, 2)
 
-#class HomepageTest(TestCase):
-#	def test_get(self):
-#		'GET / must return status code 200.'
-#		response = self.client.get('/')
-#		self.assertEquals(200, response.status_code)
-#		self.assertTemplateUsed(response, 'index.html')
-			
+class HomepageTest(TestCase):
+	"""docstring for HomepageTest"""
+	def setUp(self):
+		self.resp = self.client.get('/')
+
+
+	def test_get(self):
+		'GET / must return status code 200.'		
+		self.assertEqual(200, self.resp.status_code)
+		
+	def test_template(self):
+		'Homepag must use template index.html'
+		self.assertTemplateUsed(self.resp, 'index.html')
+		
